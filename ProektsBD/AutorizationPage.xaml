@@ -1,0 +1,28 @@
+﻿<Page x:Class="ProektsBD.AutorizationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProektsBD"
+      mc:Ignorable="d"
+      Title="AutorizationPage" Height="350" Width="600">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Логин:" Margin="10" FontSize="30" Grid.Row="0" Grid.Column="0"></Label>
+        <TextBox Name="TextboxLogin" Margin="10" Grid.Row="0" Grid.Column="1" ></TextBox>
+        <Label Content="Пароль:" Margin="10" FontSize="30" Grid.Row="1" Grid.Column="0"></Label>
+        <PasswordBox Name="PasswordParol" Margin="10" Grid.Row="1" Grid.Column="1"></PasswordBox>
+        <Button Name="BtnReg" Width="200" Content="Зарегистрироваться" Height="80" Grid.Row="2"
+                Grid.Column="0" HorizontalAlignment="Right" Click="BtnReg_Click"></Button>
+        <Button Name="BtnEnter" Width="200" Content="Войти" Height="80" Grid.Row="2" 
+                Grid.Column="1" Click="BtnEnter_Click"></Button>
+    </Grid>
+</Page>

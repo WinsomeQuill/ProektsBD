@@ -1,0 +1,19 @@
+﻿<Window x:Class="ProektsBD.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProektsBD"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Name="btnBack" Content="Назад" FontSize="20" HorizontalAlignment="Right" Width="90" 
+                Grid.Row="0" Click="btnBack_Click"></Button>
+        <Frame Name="Mainframe" NavigationUIVisibility="Hidden" Grid.Row="1" 
+               ContentRendered="Mainframe_ContentRendered"/>
+    </Grid>
+</Window>
