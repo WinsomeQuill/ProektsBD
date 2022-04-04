@@ -155,5 +155,25 @@ namespace ProektsBD
         {
             return db.TypeOrder.ToList();
         }
+
+        public static List<Users> GetUsers()
+        {
+            return db.Users.ToList();
+        }
+
+        public static List<Order> GetOrders()
+        {
+            return db.Order.ToList();
+        }
+
+        public static List<string> GetStatusNameOrders()
+        {
+            return db.Status.Select(o => o.NameStatus).ToList();
+        }
+
+        public static List<string> GetTypeNameOrders()
+        {
+            return db.TypeOrder.Select(o => o.NameOrder).ToList();
+        }
     }
 }

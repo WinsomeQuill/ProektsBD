@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="UserWindow" Height="450" Width="800">
     <Grid>
-        <TabControl >
-            <TabItem Name="UserTab" Header="Пользователи" Visibility="Collapsed">
+        <TabControl>
+            <TabItem Name="UserTab"
+                     Header="Пользователи">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="111*"/>
@@ -18,23 +19,43 @@
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Grid.ColumnSpan="2">
-                        <Button Name="BtnUpdate" Content="Изменить" Width="80" Height="30" 
-                                HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnUpdate_Click" 
+                    <StackPanel Grid.Row="0"
+                                Orientation="Horizontal"
+                                Grid.ColumnSpan="2">
+                        
+                        <Button Name="BtnUpdate"
+                                Content="Изменить"
+                                Width="80"
+                                Height="30" 
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Click="BtnUpdate_Click" 
                                 Margin="10,0,10,0"/>
-                        <Button Name="BtnRemove" Content="Удалить" Width="80" Height="30" 
-                                HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnRemove_Click" 
+                        
+                        <Button Name="BtnRemove"
+                                Content="Удалить"
+                                Width="80"
+                                Height="30" 
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Click="BtnRemove_Click" 
                                 Margin="10,0,10,0"/>
+                        
                     </StackPanel>
-                    <DataGrid Name="ListUser" AutoGenerateColumns="False" SelectionMode="Single" 
-                              Tag="UserBindingSource" Grid.Row="1" Grid.ColumnSpan="2">
+                    <DataGrid Name="ListUser"
+                              AutoGenerateColumns="False"
+                              SelectionMode="Single" 
+                              Tag="UserBindingSource"
+                              Grid.Row="1"
+                              Grid.ColumnSpan="2"
+                              IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn IsReadOnly="True" Visibility="Collapsed" Header="Id" 
+                            <DataGridTextColumn Visibility="Collapsed" Header="Id" 
                                                 Binding="{Binding IdUser}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Логин" Binding="{Binding Login}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Пароль" Binding="{Binding PassWord}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Имя" Binding="{Binding NameUser}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Роль" Binding="{Binding Role1.NameRole}"/>
+                            <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
+                            <DataGridTextColumn Header="Пароль" Binding="{Binding PassWord}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding NameUser}"/>
+                            <DataGridTextColumn Header="Роль" Binding="{Binding Role1.NameRole}"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -46,31 +67,75 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Name="OrderTab" Header="Заявки" IsSelected="True">
+            <TabItem Name="OrderTab"
+                     Header="Заявки"
+                     IsSelected="True">
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <Button Name="BtnAddOrder" Content="Добавить" Width="80" Height="30" 
-                                HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnAddOrder_Click" 
+                    <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                        
+                        <Button Name="BtnAddOrder"
+                                Content="Добавить"
+                                Width="80"
+                                Height="30" 
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Click="BtnAddOrder_Click" 
                                 Margin="10,0,10,0"/>
-                        <Button Name="BtnUpdateOrder" Content="Изменить" Width="80" Height="30" 
-                                HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnUpdateOrder_Click"
+                        
+                        <Button Name="BtnUpdateOrder"
+                                Content="Изменить"
+                                Width="80"
+                                Height="30" 
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Click="BtnUpdateOrder_Click"
                                 Margin="10,0,10,0" />
-                        <Button Name="BtnRemoveOrder" Content="Удалить" Width="80" Height="30" 
-                                HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnRemoveOrder_Click" 
+                        
+                        <Button Name="BtnRemoveOrder"
+                                Content="Удалить"
+                                Width="80"
+                                Height="30" 
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Click="BtnRemoveOrder_Click" 
                                 Margin="10,0,10,0"/>
-                        <ComboBox Name="ComboboxTypeSelect"  Width="120" HorizontalAlignment="Right" 
-                                  VerticalAlignment="Center" SelectedIndex="0" Margin="50,9,10,9"/>
-                        <ComboBox Name="ComboboxStatusSelect"  Width="120" HorizontalAlignment="Right" 
-                                  VerticalAlignment="Center" SelectedIndex="0" Margin="10,0,10,0"/>
-                        <Button Name="BtnSearch" Content="Поиск" Width="80" Height="30" HorizontalAlignment="Right"
-                                VerticalAlignment="Center" Margin="10,0,10,0" Click="BtnSearch_Click" />
+                        
+                        <ComboBox Name="ComboboxTypeSelect"
+                                  Width="120"
+                                  HorizontalAlignment="Right" 
+                                  VerticalAlignment="Center"
+                                  SelectedIndex="0"
+                                  Margin="50,9,10,9"/>
+                        
+                        <ComboBox Name="ComboboxStatusSelect"
+                                  Width="120"
+                                  HorizontalAlignment="Right" 
+                                  VerticalAlignment="Center"
+                                  SelectedIndex="0"
+                                  Margin="10,0,10,0"/>
+                        
+                        <Button Name="BtnSearch"
+                                Content="Поиск"
+                                Width="80"
+                                Height="30"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Margin="10,0,10,0"
+                                Click="BtnSearch_Click"/>
+                        
                     </StackPanel>
-                    <DataGrid Name="ListOrder" AutoGenerateColumns="False" SelectionMode="Single" 
-                              Tag="UserBindingSource" Grid.RowSpan="2" Grid.Row="1">
+                    <DataGrid Name="ListOrder"
+                              AutoGenerateColumns="False"
+                              SelectionMode="Single" 
+                              Tag="UserBindingSource"
+                              Grid.RowSpan="2"
+                              Grid.Row="1">
+                        
                         <DataGrid.Columns>
                             <DataGridTextColumn IsReadOnly="True" Visibility="Collapsed" Header="Id" 
                                                 Binding="{Binding IdOrder}"/>
