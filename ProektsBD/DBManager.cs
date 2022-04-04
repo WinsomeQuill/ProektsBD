@@ -37,8 +37,14 @@ namespace ProektsBD
             return true;
         }
 
+        // метод проверки, существует ли пользователь с таким логином
+        public static bool ExistUser(string login)
+        {
+            return db.Users.AsNoTracking().Where(o => o.Login == login).FirstOrDefault() != null;
+        }
+
         // метод регистрации пользователя
-        public static bool Reg(string login, string password, string name, byte[] photo)
+        public static void Reg(string login, string password, string name, byte[] photo = null)
         {
             Users user = new Users
             {
@@ -50,17 +56,16 @@ namespace ProektsBD
             };
 
             db.Users.Add(user);
-            int result = db.SaveChanges();
-            return result != 0;
+            db.SaveChanges();
         }
 
         // метод создания заявки пользователя
-        public static void AddOrder(string text, int type)
+        public static void AddOrder(string text, int id_type)
         {
             Order order = new Order
             {
                 Text = text,
-                IdType = type,
+                IdType = id_type,
                 IdUsers = UserCache.Id,
                 IdStatus = 1,
             };
@@ -117,7 +122,7 @@ namespace ProektsBD
         }
 
         //удаление пользователя
-        public static void removeUser(int id_user)
+        public static void RemoveUser(int id_user)
         {
             //находим пользователя в БД по id
             Users user = db.Users.Where(o => o.IdUsers == id_user).Select(o => o).First();
@@ -136,7 +141,7 @@ namespace ProektsBD
             db.SaveChanges();
         }
         //удаление заявки
-        public static void removeOrder(int id_order)
+        public static void RemoveOrder(int id_order)
         {
             //находим заявку в БД по id
             Order selectedOrder= db.Order.Where(o => o.IdOrder == id_order).Select(o => o).First();
@@ -144,6 +149,11 @@ namespace ProektsBD
             db.Order.Remove(selectedOrder);
             //сохраняем изменения в БД
             db.SaveChanges();
+        }
+
+        public static List<TypeOrder> GetTypeOrders()
+        {
+            return db.TypeOrder.ToList();
         }
     }
 }

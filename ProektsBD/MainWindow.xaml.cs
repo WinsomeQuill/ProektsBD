@@ -23,8 +23,8 @@ namespace ProektsBD
         public MainWindow()
         {
             InitializeComponent();
-            FrameManager.MainFrame = this.Mainframe;
-            Mainframe.Navigate(new AutorizationPage());
+            new Windows.RegistrationWindow().Show();
+            Close();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

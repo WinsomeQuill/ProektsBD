@@ -9,6 +9,7 @@ namespace ProektsBD
     {
         public static byte[] ImageToBinary(BitmapImage image)
         {
+            if (image == null) return null;
             MemoryStream stream = new MemoryStream();
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(image));
@@ -18,8 +19,8 @@ namespace ProektsBD
         public static BitmapImage BinaryToImage(byte[] imageData)
         {
             if (imageData == null || imageData.Length == 0) return null;
-            var image = new BitmapImage();
-            using (var mem = new MemoryStream(imageData))
+            BitmapImage image = new BitmapImage();
+            using (MemoryStream mem = new MemoryStream(imageData))
             {
                 mem.Position = 0;
                 image.BeginInit();
