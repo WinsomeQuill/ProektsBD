@@ -76,12 +76,7 @@ namespace ProektsBD.Windows
             int selected = orderItem.IdOrder;
             ListOrder.Items.Clear();
             DBManager.RemoveOrder(selected);
-
-            List<Order> orders = DBManager.GetOrders();
-            foreach (Order item in orders)
-            {
-                ListOrder.Items.Add(item);
-            }
+            UpdateListOrder();
         }
 
         private void BtnUpdateOrder_Click(object sender, RoutedEventArgs e)
@@ -123,6 +118,12 @@ namespace ProektsBD.Windows
                 return;
             }
 
+            if (userItem.User.IdUsers == UserCache.Id)
+            {
+                MessageBox.Show("Нельзя удалить самого себя!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             MessageBoxResult result = MessageBox.Show("Вы действительно хотите удалить?", "Подтверждение",
                 MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -131,6 +132,7 @@ namespace ProektsBD.Windows
             int selected = userItem.IdUsers;
             DBManager.RemoveUser(selected);
             UpdateListUsers();
+            UpdateListOrder();
         }
 
         private void ButtonGoBack_Click(object sender, RoutedEventArgs e)
@@ -162,7 +164,7 @@ namespace ProektsBD.Windows
                 typeId = (itemType.Tag as TypeOrder).IdTypeOrder;
             }
 
-            if (UserCache.Id == 1) // если авторизовался администратор, то все заказы
+            if (UserCache.Role.IdRole == 1) // если авторизовался администратор, то все заказы
             {
                 // если выбраны все типы и все статусы
                 if (itemStatus.Content.ToString() == "Все" && itemType.Content.ToString() == "Все")

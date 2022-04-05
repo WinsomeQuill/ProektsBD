@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace ProektsBD.DataGrid
 {
@@ -13,6 +14,7 @@ namespace ProektsBD.DataGrid
         public string PassWord { get; set; }
         public string NameUser { get; set; }
         public string NameRole { get; set; }
+        public BitmapImage Photo { get; set; }
         public Users User { get; set; }
 
         public UserItem(Users user)
@@ -22,6 +24,7 @@ namespace ProektsBD.DataGrid
             PassWord = user.PassWord;
             NameUser = user.NameUser;
             NameRole = user.Role.NameRole;
+            Photo = Utils.BinaryToImage(user.Photo);
             User = user;
         }
     }

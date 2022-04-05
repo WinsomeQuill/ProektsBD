@@ -84,13 +84,13 @@ namespace ProektsBD
         }
 
         //метод редактирования пользователя
-        public static void UpdateUser(int id_user, string login, string password, string name, string role, byte[] photo)
+        public static void UpdateUser(int id_user, string login, string password, string name, int id_role, byte[] photo)
         {
             Users user = db.Users.Where(o => o.IdUsers == id_user).First();
             user.Login = login;
             user.PassWord = password;
             user.NameUser = name;
-            user.IdRole = db.Role.Where(o => o.NameRole == role).Select(o => o.IdRole).First();
+            user.IdRole = id_role;
             user.Photo = photo;
             db.SaveChanges(); //сохраняем в БД
         }
@@ -125,13 +125,13 @@ namespace ProektsBD
         public static void RemoveUser(int id_user)
         {
             //находим пользователя в БД по id
-            Users user = db.Users.Where(o => o.IdUsers == id_user).Select(o => o).First();
+            Users user = db.Users.Where(o => o.IdUsers == id_user).First();
             //подсчитываем заявки пользователя
-            int count = db.Order.Where(o => o.Users == user).Select(o => o).Count();
+            int count = db.Order.Where(o => o.IdUsers == id_user).Count();
             //в цикле удаляем заявки
             for (int i = 0; i < count; i++)
             {
-                Order selOrder = db.Order.Where(o => o.Users == user).Select(o => o).First();
+                Order selOrder = db.Order.Where(o => o.IdUsers == id_user).First();
                 db.Order.Remove(selOrder);
                 db.SaveChanges();
             }
@@ -180,6 +180,11 @@ namespace ProektsBD
         public static List<string> GetTypeNameOrders()
         {
             return db.TypeOrder.Select(o => o.NameOrder).ToList();
+        }
+
+        public static List<Role> GetRoles()
+        {
+            return db.Role.ToList();
         }
     }
 }
