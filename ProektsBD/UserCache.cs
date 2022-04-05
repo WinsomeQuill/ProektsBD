@@ -14,5 +14,13 @@ namespace ProektsBD
         public static string Login { get; set; }
         public static Role Role { get; set; }
         public static BitmapImage Photo { get; set; } = null;
+
+        public static void Reset()
+        {
+            Name = Login = null;
+            Id = 0;
+            Role = null;
+            Photo = null;
+        }
     }
 }

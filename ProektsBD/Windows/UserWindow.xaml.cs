@@ -123,8 +123,7 @@ namespace ProektsBD.Windows
                 return;
             }
 
-            int selectindex = user.IdUsers;
-            FrameManager.MainFrame.Navigate(new UpdateUser());
+            new UpdateUserWindow(user).ShowDialog();
         }
 
         private void BtnRemove_Click(object sender, RoutedEventArgs e)
@@ -212,6 +211,13 @@ namespace ProektsBD.Windows
             {
                 ListOrder.Items.Add(item);
             }
+        }
+
+        private void ButtonGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            UserCache.Reset();
+            new AuthorizationWindow().Show();
+            Close();
         }
     }
 }

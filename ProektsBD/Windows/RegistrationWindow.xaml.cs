@@ -43,7 +43,7 @@ namespace ProektsBD.Windows
                 return;
             }
 
-            if(!DBManager.existUser(login))
+            if(!DBManager.ExistUser(login))
             {
                 MessageBox.Show("Пользователь с таким логином уже зарегистрирован!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

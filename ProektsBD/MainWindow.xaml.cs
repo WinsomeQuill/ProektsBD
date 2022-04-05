@@ -23,25 +23,8 @@ namespace ProektsBD
         public MainWindow()
         {
             InitializeComponent();
-            new Windows.RegistrationWindow().Show();
+            new Windows.AuthorizationWindow().Show();
             Close();
-        }
-
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            Mainframe.GoBack();
-        }
-
-        private void Mainframe_ContentRendered(object sender, EventArgs e)
-        {
-            if(Mainframe.CanGoBack)
-            {
-                btnBack.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                btnBack.Visibility = Visibility.Collapsed;
-            }
         }
     }
 }

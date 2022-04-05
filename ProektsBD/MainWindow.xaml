@@ -7,18 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Button Name="btnBack"
-                Content="Назад"
-                FontSize="20"
-                HorizontalAlignment="Right"
-                Width="90" 
-                Grid.Row="0"
-                Click="btnBack_Click"/>
-        <Frame Name="Mainframe" NavigationUIVisibility="Hidden" Grid.Row="1" 
-               ContentRendered="Mainframe_ContentRendered"/>
+
     </Grid>
 </Window>

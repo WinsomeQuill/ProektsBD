@@ -7,7 +7,19 @@
         mc:Ignorable="d"
         Title="UserWindow" Height="450" Width="800">
     <Grid>
-        <TabControl>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Button Name="ButtonGoBack"
+                Grid.Row="0"
+                Content="Назад"
+                Width="90"
+                HorizontalAlignment="Right"
+                FontSize="20"
+                Click="ButtonGoBack_Click"/>
+
+        <TabControl Grid.Row="1">
             <TabItem Name="UserTab"
                      Header="Пользователи">
                 <Grid Background="#FFE5E5E5">
