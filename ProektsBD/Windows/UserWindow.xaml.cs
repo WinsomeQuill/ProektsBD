@@ -23,6 +23,8 @@ namespace ProektsBD.Windows
         {
             InitializeComponent();
 
+            Utils.UserWindow = this;
+
             if (UserCache.Role.IdRole == 1) // Если админ
             {
                 UserTab.Visibility = Visibility.Visible;
@@ -66,6 +68,92 @@ namespace ProektsBD.Windows
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateListOrder();
+        }
+
+        private void BtnRemoveOrder_Click(object sender, RoutedEventArgs e)
+        {
+            Order order = ListOrder.SelectedItem as Order;
+            if (order == null)
+            {
+                MessageBox.Show("Ничего не выделено!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            MessageBoxResult result = MessageBox.Show("Вы действительно хотите удалить?", "Подтверждение",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.No) return;
+
+            int selected = order.IdOrder;
+            ListOrder.Items.Clear();
+            DBManager.RemoveOrder(selected);
+
+            List<Order> orders = DBManager.GetOrders();
+            foreach (Order item in orders)
+            {
+                ListOrder.Items.Add(item);
+            }
+        }
+
+        private void BtnUpdateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            Order order = ListOrder.SelectedItem as Order;
+            if (order == null)
+            {
+                MessageBox.Show("Ничего не выделено!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            new UpdateOrderWindow(order).ShowDialog();
+        }
+
+        private void BtnAddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            new AddOrderWindow().ShowDialog();
+        }
+
+        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            Users user = ListUser.SelectedItem as Users;
+            if (user == null)
+            {
+                MessageBox.Show("Ничего не выделено!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            int selectindex = user.IdUsers;
+            FrameManager.MainFrame.Navigate(new UpdateUser());
+        }
+
+        private void BtnRemove_Click(object sender, RoutedEventArgs e)
+        {
+
+            Users user = ListUser.SelectedItem as Users;
+            if (user == null)
+            {
+                MessageBox.Show("Ничего не выделено!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            MessageBoxResult result = MessageBox.Show("Вы действительно хотите удалить?", "Подтверждение",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.No) return;
+
+            int selected = user.IdUsers;
+            ListUser.Items.Clear();
+            DBManager.RemoveUser(selected);
+
+            List<Users> users = DBManager.GetUsers();
+            foreach (Users item in users)
+            {
+                ListUser.Items.Add(item);
+            }
+        }
+
+        public void UpdateListOrder()
         {
             List<Order> datao = new List<Order>(); // создаем список
             // получение id статуса
@@ -120,91 +208,9 @@ namespace ProektsBD.Windows
                 }
             }
 
-            foreach(Order item in datao)
+            foreach (Order item in datao)
             {
                 ListOrder.Items.Add(item);
-            }
-        }
-
-        private void BtnRemoveOrder_Click(object sender, RoutedEventArgs e)
-        {
-            Order order = ListOrder.SelectedItem as Order;
-            if (order == null)
-            {
-                MessageBox.Show("Ничего не выделено!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            MessageBoxResult result = MessageBox.Show("Вы действительно хотите удалить?", "Подтверждение",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.No) return;
-
-            int selected = order.IdOrder;
-            ListOrder.Items.Clear();
-            DBManager.RemoveOrder(selected);
-
-            List<Order> orders = DBManager.GetOrders();
-            foreach(Order item in orders)
-            {
-                ListOrder.Items.Add(item);
-            }
-        }
-
-        private void BtnUpdateOrder_Click(object sender, RoutedEventArgs e)
-        {
-            Order order = ListOrder.SelectedItem as Order;
-            if (order == null)
-            {
-                MessageBox.Show("Ничего не выделено!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            int selectindex = order.IdOrder;
-            FrameManager.MainFrame.Navigate(new UpdateOrder());
-        }
-
-        private void BtnAddOrder_Click(object sender, RoutedEventArgs e)
-        {
-            new AddOrderWindow().ShowDialog();
-        }
-
-        private void BtnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            Users user = ListUser.SelectedItem as Users;
-            if (user == null)
-            {
-                MessageBox.Show("Ничего не выделено!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            int selectindex = user.IdUsers;
-            FrameManager.MainFrame.Navigate(new UpdateUser());
-        }
-
-        private void BtnRemove_Click(object sender, RoutedEventArgs e)
-        {
-
-            Users user = ListUser.SelectedItem as Users;
-            if (user == null)
-            {
-                MessageBox.Show("Ничего не выделено!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            MessageBoxResult result = MessageBox.Show("Вы действительно хотите удалить?", "Подтверждение",
-                MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (result == MessageBoxResult.No) return;
-
-            int selected = user.IdUsers;
-            ListUser.Items.Clear();
-            DBManager.RemoveUser(selected);
-
-            List<Users> users = DBManager.GetUsers();
-            foreach(Users item in users)
-            {
-                ListUser.Items.Add(item);
             }
         }
     }

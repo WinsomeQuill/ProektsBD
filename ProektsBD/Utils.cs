@@ -7,6 +7,7 @@ namespace ProektsBD
 {
     public static class Utils
     {
+        public static Windows.UserWindow UserWindow { get; set; }
         public static byte[] ImageToBinary(BitmapImage image)
         {
             if (image == null) return null;
