@@ -49,6 +49,9 @@ namespace ProektsBD.Windows
                 }
             }
 
+            ComboboxTypeSelect.Items.Add(new TypeOrder() { NameOrder = "Все" });
+            ComboboxStatusSelect.Items.Add(new Status() { NameStatus = "Все" });
+
             List<string> typeOrders = DBManager.GetTypeNameOrders();
             foreach (string typeOrder in typeOrders)
             {
@@ -64,68 +67,60 @@ namespace ProektsBD.Windows
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            List<Order> datao = new List<Order>();
-            //проверяем что в комбобоксах что-нибудь выбрано
-            if (ComboboxStatusSelect.SelectedIndex > 0 || ComboboxTypeSelect.SelectedIndex > 0)
+            List<Order> datao = new List<Order>(); // создаем список
+            // получение id статуса
+            int StatusId = (ComboboxStatusSelect.SelectedItem as Status).IdStatus;
+            // получение id типа
+            int TypeId = (ComboboxTypeSelect.SelectedItem as TypeOrder).IdTypeOrder;
+
+            if (UserCache.Id == 1) // если авторизовался администратор, то все заказы
             {
-                ListOrder.Items.Clear();
-                //проверяем что оба комбобокса заполнены
-                if (ComboboxStatusSelect.SelectedIndex > 0 && ComboboxTypeSelect.SelectedIndex > 0)
-                {
-                    if (UserCache.Role.IdRole == 1)
-                    {
-                        datao = DBManager.db.Order.Where(o => o.IdStatus == ComboboxStatusSelect.SelectedIndex
-                              && o.IdType == ComboboxTypeSelect.SelectedIndex).ToList();
-                    }
-                    else
-                    {
-                        datao = DBManager.db.Order.Where(o => o.IdUsers == UserCache.Role.IdRole &&
-                              o.IdStatus == ComboboxStatusSelect.SelectedIndex
-                              && o.IdType == ComboboxTypeSelect.SelectedIndex).ToList();
-                    }
-                }
-                //проверяем что заполнен комбобокс типа
-                else if (ComboboxTypeSelect.SelectedIndex > 0)
-                {
-                    if (UserCache.Role.IdRole == 1)
-                    {
-                        datao = DBManager.db.Order.Where(o => o.IdType == ComboboxTypeSelect.SelectedIndex)
-                            .ToList();
-                    }
-                    else
-                    {
-                        datao = DBManager.db.Order.Where(o => o.IdUsers == UserCache.Id &&
-                              o.IdType == ComboboxTypeSelect.SelectedIndex).ToList();
-                    }
-                }
-                //проверяем что заполнен комбобокс статуса
-                else if (ComboboxStatusSelect.SelectedIndex > 0)
-                {
-                    if (UserCache.Role.IdRole == 1)
-                    {
-                        datao = DBManager.db.Order.Where(o => o.IdStatus == ComboboxStatusSelect.SelectedIndex)
-                            .ToList();
-                    }
-                    else
-                    {
-                        datao = DBManager.db.Order.Where(o => o.IdUsers == UserCache.Id &&
-                              o.IdStatus == ComboboxStatusSelect.SelectedIndex).ToList();
-                    }
-                }
-            }
-            else //если ни один комбобокс не заполнен
-            {
-                if (UserCache.Role.IdRole == 1)
+                // если выбраны все типы и все статусы
+                if ((ComboboxStatusSelect.SelectedItem as Status).NameStatus == "Все" && (ComboboxTypeSelect.SelectedItem as TypeOrder).NameOrder == "Все")
                 {
                     datao = DBManager.db.Order.ToList();
                 }
-                else
+                // если выбраны все статусы
+                if ((ComboboxStatusSelect.SelectedItem as Status).NameStatus == "Все" && (ComboboxTypeSelect.SelectedItem as TypeOrder).NameOrder != "Все")
                 {
-                    datao = DBManager.db.Order.Where(o => o.IdUsers == UserCache.Id).ToList();
+                    datao = DBManager.db.Order.Where(x => x.IdType == TypeId).ToList();
+                }
+                // если выбраны все типы
+                if ((ComboboxStatusSelect.SelectedItem as Status).NameStatus != "Все" && (ComboboxTypeSelect.SelectedItem as TypeOrder).NameOrder == "Все")
+                {
+                    datao = DBManager.db.Order.Where(x => x.IdStatus == StatusId).ToList();
+                }
+                // если выбраны различные типы и статусы
+                if ((ComboboxStatusSelect.SelectedItem as Status).NameStatus != "Все" && (ComboboxTypeSelect.SelectedItem as TypeOrder).NameOrder != "Все")
+                {
+                    datao = DBManager.db.Order.Where(x => x.IdType == TypeId && x.IdStatus == StatusId).ToList();
+                }
+            }
+            else // если авторизовался пользователь, то отображаем только его заказы 
+            {
+                // если выбраны все типы и все статусы
+                if ((ComboboxStatusSelect.SelectedItem as Status).NameStatus == "Все" && (ComboboxTypeSelect.SelectedItem as TypeOrder).NameOrder == "Все")
+                {
+                    datao = DBManager.db.Order.Where(x => x.IdUsers == UserCache.Id).ToList();
+                }
+                // если выбраны все статусы
+                if ((ComboboxStatusSelect.SelectedItem as Status).NameStatus == "Все" && (ComboboxTypeSelect.SelectedItem as TypeOrder).NameOrder != "Все")
+                {
+                    datao = DBManager.db.Order.Where(x => x.IdType == TypeId && x.IdUsers == UserCache.Id).ToList();
+                }
+                // если выбраны все типы
+                if ((ComboboxStatusSelect.SelectedItem as Status).NameStatus != "Все" && (ComboboxTypeSelect.SelectedItem as TypeOrder).NameOrder == "Все")
+                {
+                    datao = DBManager.db.Order.Where(x => x.IdStatus == StatusId && x.IdUsers == UserCache.Id).ToList();
+                }
+                // если выбраны различные типы и статусы
+                if ((ComboboxStatusSelect.SelectedItem as Status).NameStatus != "Все" && (ComboboxTypeSelect.SelectedItem as TypeOrder).NameOrder != "Все")
+                {
+                    datao = DBManager.db.Order.Where(x => x.IdType == TypeId && x.IdStatus == StatusId && x.IdUsers == UserCache.Id).ToList();
                 }
             }
 
-            foreach (Order item in datao)
+            foreach(Order item in datao)
             {
                 ListOrder.Items.Add(item);
             }
@@ -171,7 +166,7 @@ namespace ProektsBD.Windows
 
         private void BtnAddOrder_Click(object sender, RoutedEventArgs e)
         {
-            // pass
+            new AddOrderWindow().ShowDialog();
         }
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)

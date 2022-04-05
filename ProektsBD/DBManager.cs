@@ -140,6 +140,7 @@ namespace ProektsBD
             //сохраняем изменения в БД
             db.SaveChanges();
         }
+
         //удаление заявки
         public static void RemoveOrder(int id_order)
         {
