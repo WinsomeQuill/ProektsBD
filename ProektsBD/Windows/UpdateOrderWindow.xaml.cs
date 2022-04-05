@@ -45,10 +45,7 @@ namespace ProektsBD.Windows
                 return;
             }
 
-            Order.Text = text;
-            Order.TypeOrder = typeOrder;
-            Order.Status = status;
-            DBManager.db.SaveChanges();
+            DBManager.UpdateOrder(Order.IdOrder, text, typeOrder.IdTypeOrder, status.IdStatus);
             Utils.UserWindow.UpdateListOrder();
             MessageBox.Show("Заявка успешно отредактирована!", "Успешно" ,MessageBoxButton.OK, MessageBoxImage.Information);
             Close();

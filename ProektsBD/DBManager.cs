@@ -74,24 +74,24 @@ namespace ProektsBD
         }
 
         // метод редактирования заявки
-        public static void UpdateOrder (int id_order, string text, int type, int status)
+        public static void UpdateOrder (int id_order, string text, int id_type, int id_status)
         {
             Order order = db.Order.Where(o => o.IdOrder == id_order).First();
             order.Text = text;
-            order.IdType = type;
-            order.IdStatus = status;
+            order.IdType = id_type;
+            order.IdStatus = id_status;
             db.SaveChanges(); //сохраняем в БД
         }
 
         //метод редактирования пользователя
-        public static void UpdateUser(int id_user, string login, string password, string name, int role, byte[] photo)
+        public static void UpdateUser(int id_user, string login, string password, string name, string role, byte[] photo)
         {
-            Users us = db.Users.Where(o => o.IdUsers == id_user).First();
-            us.Login = login;
-            us.PassWord = password;
-            us.NameUser = name;
-            us.IdRole = role;
-            us.Photo = photo;
+            Users user = db.Users.Where(o => o.IdUsers == id_user).First();
+            user.Login = login;
+            user.PassWord = password;
+            user.NameUser = name;
+            user.IdRole = db.Role.Where(o => o.NameRole == role).Select(o => o.IdRole).First();
+            user.Photo = photo;
             db.SaveChanges(); //сохраняем в БД
         }
 
