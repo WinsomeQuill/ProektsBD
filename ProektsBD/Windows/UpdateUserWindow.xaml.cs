@@ -55,7 +55,9 @@ namespace ProektsBD.Windows
             }
 
             DBManager.UpdateUser(User.IdUsers, login, pass, name, ComboboxRole.SelectedItem as string, photo);
+            Utils.UserWindow.UpdateListUsers();
             MessageBox.Show("Пользователь успешно изменен!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+            Close();
         }
     }
 }

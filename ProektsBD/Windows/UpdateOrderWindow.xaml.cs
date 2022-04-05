@@ -26,26 +26,43 @@ namespace ProektsBD.Windows
             Order = order;
             // Вывод данных в компоненты
             TextboxUpdateOrder.Text = order.Text;
-            DBManager.GetTypeNameOrders().ForEach(x => ComboboxTypeOrder.Items.Add(x));
-            DBManager.GetStatusNameOrders().ForEach(x => ComboboxStatusOrder.Items.Add(x));
-            // Выбор актуальных данных для заказа
-            ComboboxTypeOrder.SelectedIndex = order.IdType - 1;
-            ComboboxStatusOrder.SelectedIndex = order.IdStatus - 1;
+            DBManager.GetTypeOrders().ForEach(x =>
+            {
+                ComboBoxItem item = new ComboBoxItem { Content = x.NameOrder, Tag = x };
+                ComboboxTypeOrder.Items.Add(item);
+                if (x.IdTypeOrder == Order.IdType)
+                {
+                    ComboboxTypeOrder.SelectedItem = item;
+                }
+            });
+
+            DBManager.GetStatusOrders().ForEach(x =>
+            {
+                ComboBoxItem item = new ComboBoxItem { Content = x.NameStatus, Tag = x };
+                ComboboxStatusOrder.Items.Add(item);
+                if (x.IdStatus == Order.IdStatus)
+                {
+                    ComboboxStatusOrder.SelectedItem = item;
+                }
+            });
         }
 
         private void BtnUpdateOrder_Click(object sender, RoutedEventArgs e)
         {
             string text = TextboxUpdateOrder.Text;
-            TypeOrder typeOrder = ComboboxTypeOrder.SelectedItem as TypeOrder;
-            Status status = ComboboxStatusOrder.SelectedItem as Status;
+            ComboBoxItem typeItem = ComboboxTypeOrder.SelectedItem as ComboBoxItem;
+            ComboBoxItem statusItem = ComboboxStatusOrder.SelectedItem as ComboBoxItem;
+
+            TypeOrder typeOrder = typeItem.Tag as TypeOrder;
+            Status statusOrder = statusItem.Tag as Status;
 
             if (string.IsNullOrWhiteSpace(text))
             {
-                MessageBox.Show("Запонмите все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Заполните все поля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            DBManager.UpdateOrder(Order.IdOrder, text, typeOrder.IdTypeOrder, status.IdStatus);
+            DBManager.UpdateOrder(Order.IdOrder, text, typeOrder.IdTypeOrder, statusOrder.IdStatus);
             Utils.UserWindow.UpdateListOrder();
             MessageBox.Show("Заявка успешно отредактирована!", "Успешно" ,MessageBoxButton.OK, MessageBoxImage.Information);
             Close();

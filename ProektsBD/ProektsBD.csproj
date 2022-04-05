@@ -79,6 +79,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataGrid\OrderItem.cs" />
+    <Compile Include="DataGrid\UserItem.cs" />
     <Compile Include="DBManager.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>

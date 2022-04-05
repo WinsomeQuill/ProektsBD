@@ -67,7 +67,7 @@
                             <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
                             <DataGridTextColumn Header="Пароль" Binding="{Binding PassWord}"/>
                             <DataGridTextColumn Header="Имя" Binding="{Binding NameUser}"/>
-                            <DataGridTextColumn Header="Роль" Binding="{Binding Role1.NameRole}"/>
+                            <DataGridTextColumn Header="Роль" Binding="{Binding NameRole}"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -143,19 +143,19 @@
                     </StackPanel>
                     <DataGrid Name="ListOrder"
                               AutoGenerateColumns="False"
+                              IsReadOnly="True"
                               SelectionMode="Single" 
                               Tag="UserBindingSource"
                               Grid.RowSpan="2"
                               Grid.Row="1">
                         
                         <DataGrid.Columns>
-                            <DataGridTextColumn IsReadOnly="True" Visibility="Collapsed" Header="Id" 
-                                                Binding="{Binding IdOrder}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Проблема" Binding="{Binding Text}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Тип" Binding="{Binding TypeOrder.NameOrder}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Статус" Binding="{Binding Status1.NameStatus}"/>
-                            <DataGridTextColumn x:Name="Customer" IsReadOnly="True" Header="Заказчик" 
-                                                Visibility="Collapsed" Binding="{Binding Users1.NameUser}"/>
+                            <DataGridTextColumn Visibility="Collapsed" Header="Id" Binding="{Binding IdOrder}"/>
+                            <DataGridTextColumn Header="Проблема" Binding="{Binding Text}"/>
+                            <DataGridTextColumn Header="Тип" Binding="{Binding NameOrder}"/>
+                            <DataGridTextColumn Header="Статус" Binding="{Binding NameStatus}"/>
+                            <DataGridTextColumn x:Name="Customer" Header="Заказчик"
+                                                Visibility="Collapsed" Binding="{Binding NameUser}"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

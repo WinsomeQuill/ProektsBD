@@ -73,16 +73,7 @@
                    Width="200"
                    Height='200'/>
         </StackPanel>
-        
-        <Button Name="BtnRegist"
-                Grid.Column="1"
-                Grid.Row="1"
-                Width="200"
-                Content="Добавить" 
-                Height="80"
-                HorizontalAlignment="Center" 
-                Click="BtnRegist_Click"/>
-        
+
         <Button Name="BtnNewPhoto"
                 Grid.Column="0"
                 Grid.Row="1"
@@ -91,5 +82,30 @@
                 Height="80"
                 HorizontalAlignment="Center" 
                 Click="BtnNewPhoto_Click"/>
+
+        <Grid Grid.Row="1"
+              Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="BtnRegist"
+                Grid.Column="0"
+                Grid.Row="1"
+                Width="200"
+                Content="Зарегистрироваться" 
+                Height="80"
+                HorizontalAlignment="Center" 
+                Click="BtnRegist_Click"/>
+            
+            <Button Name="BtnBack"
+                Grid.Column="1"
+                Grid.Row="1"
+                Width="120"
+                Content="Назад"
+                Height="80"
+                HorizontalAlignment="Center"
+                Click="BtnBack_Click"/>
+        </Grid>
     </Grid>
 </Window>

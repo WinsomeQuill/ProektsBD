@@ -49,7 +49,9 @@ namespace ProektsBD.Windows
             TypeOrder typeOrder = comboBoxItem.Tag as TypeOrder;
 
             DBManager.AddOrder(text, typeOrder.IdTypeOrder);
+            Utils.UserWindow.UpdateListOrder();
             MessageBox.Show("Вы создали заявку!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+            Close();
         }
     }
 }

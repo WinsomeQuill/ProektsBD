@@ -28,7 +28,9 @@ namespace ProektsBD.Windows
 
         private void BtnNewPhoto_Click(object sender, RoutedEventArgs e)
         {
-            photo = Utils.ImageToBinary(Utils.GetImageWindowsDialog());
+            BitmapImage image = Utils.GetImageWindowsDialog();
+            photo = Utils.ImageToBinary(image);
+            PhotoReg.Source = image;
         }
 
         private void BtnRegist_Click(object sender, RoutedEventArgs e)
@@ -43,13 +45,22 @@ namespace ProektsBD.Windows
                 return;
             }
 
-            if(!DBManager.ExistUser(login))
+            if(DBManager.ExistUser(login))
             {
                 MessageBox.Show("Пользователь с таким логином уже зарегистрирован!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             DBManager.Reg(login, pass, name, photo);
+            MessageBox.Show("Вы зарегистрировались!", "Успшено", MessageBoxButton.OK, MessageBoxImage.Information);
+            new AuthorizationWindow().Show();
+            Close();
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            new AuthorizationWindow().Show();
+            Close();
         }
     }
 }

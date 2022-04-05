@@ -145,7 +145,7 @@ namespace ProektsBD
         public static void RemoveOrder(int id_order)
         {
             //находим заявку в БД по id
-            Order selectedOrder= db.Order.Where(o => o.IdOrder == id_order).Select(o => o).First();
+            Order selectedOrder = db.Order.Where(o => o.IdOrder == id_order).Select(o => o).First();
             //удаляем заявку из БД
             db.Order.Remove(selectedOrder);
             //сохраняем изменения в БД
@@ -155,6 +155,11 @@ namespace ProektsBD
         public static List<TypeOrder> GetTypeOrders()
         {
             return db.TypeOrder.ToList();
+        }
+
+        public static List<Status> GetStatusOrders()
+        {
+            return db.Status.ToList();
         }
 
         public static List<Users> GetUsers()
