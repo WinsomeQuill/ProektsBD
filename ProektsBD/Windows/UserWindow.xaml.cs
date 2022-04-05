@@ -27,12 +27,12 @@ namespace ProektsBD.Windows
 
             if (UserCache.Role.IdRole == 1) // Если админ
             {
-                UserTab.Visibility = Visibility.Visible;
                 Customer.Visibility = Visibility.Visible;
                 UpdateListUsers();
             }
             else
             {
+                BtnUpdateOrder.Visibility = Visibility.Collapsed;
                 UserTab.Visibility = Visibility.Collapsed;
             }
 
