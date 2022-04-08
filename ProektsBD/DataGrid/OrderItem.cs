@@ -9,12 +9,12 @@ namespace ProektsBD.DataGrid
 {
     public class OrderItem
     {
-        public int IdOrder { get; set; }
-        public string Text { get; set; }
-        public string NameOrder { get; set; }
-        public string NameStatus { get; set; }
-        public string NameUser { get; set; }
-        public Order Order { get; set; }
+        public int IdOrder { get; set; } // id заявки
+        public string Text { get; set; } // описание заявки
+        public string NameOrder { get; set; } // назание заявки
+        public string NameStatus { get; set; } // статус заявки
+        public string NameUser { get; set; } // имя пользоателя
+        public Order Order { get; set; } // заявка
         public BitmapImage Photo { get; set; } // фотография заказчика
 
         public OrderItem(Order order)

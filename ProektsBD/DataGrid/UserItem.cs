@@ -9,13 +9,13 @@ namespace ProektsBD.DataGrid
 {
     public class UserItem
     {
-        public int IdUsers { get; set; }
-        public string Login { get; set; }
-        public string PassWord { get; set; }
-        public string NameUser { get; set; }
-        public string NameRole { get; set; }
-        public BitmapImage Photo { get; set; }
-        public Users User { get; set; }
+        public int IdUsers { get; set; } // id пользоателя
+        public string Login { get; set; } // логин пользоателя
+        public string PassWord { get; set; } // пароль пользователя
+        public string NameUser { get; set; } // имя пользователя
+        public string NameRole { get; set; } // названи роли пользователя
+        public BitmapImage Photo { get; set; } // фотография пользователя
+        public Users User { get; set; } // пользователь
 
         public UserItem(Users user)
         {

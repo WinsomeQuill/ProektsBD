@@ -39,19 +39,20 @@ namespace ProektsBD.Windows
             string name = TextboxNameReg.Text;
             string pass = PasswordParolReg.Password;
 
-            if (login.Length == 0 || name.Length == 0 || pass.Length == 0)
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(name)
+                || string.IsNullOrWhiteSpace(pass)) // если логин или имя или пароль пустой
             {
                 MessageBox.Show("Не все поля заполнены!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if(DBManager.ExistUser(login))
+            if(DBManager.ExistUser(login)) // если пользоатель с таким логином уже есть в БД
             {
                 MessageBox.Show("Пользователь с таким логином уже зарегистрирован!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            DBManager.Reg(login, pass, name, photo);
+            DBManager.Reg(login, pass, name, photo); // регистрация пользователя
             MessageBox.Show("Вы зарегистрировались!", "Успшено", MessageBoxButton.OK, MessageBoxImage.Information);
             new AuthorizationWindow().Show();
             Close();

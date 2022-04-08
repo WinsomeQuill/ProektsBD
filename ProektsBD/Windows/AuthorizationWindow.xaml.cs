@@ -35,13 +35,13 @@ namespace ProektsBD.Windows
             string login = TextboxLogin.Text;
             string pass = PasswordParol.Password;
 
-            if (login.Length == 0 || pass.Length == 0)
+            if (string.IsNullOrWhiteSpace(login) || string.IsNullOrWhiteSpace(pass)) // если логин или пароль пустой
             {
                 MessageBox.Show("Заполните все поля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            if (!DBManager.Auth(login, pass))
+            if (!DBManager.Auth(login, pass)) // если логин или пароль неверный
             {
                 MessageBox.Show("Неверный логи или пароль!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

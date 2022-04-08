@@ -19,18 +19,18 @@ namespace ProektsBD.Windows
     /// </summary>
     public partial class UpdateUserWindow : Window
     {
-        private byte[] photo { get; set; } = null;
-        private Users User { get; set; }
+        private byte[] photo { get; set; } = null; // фотография пользователя в байтах
+        private Users User { get; set; } // пользователь
         public UpdateUserWindow(Users user)
         {
             InitializeComponent();
             User = user;
 
-            DBManager.GetRoles().ForEach(x =>
+            DBManager.GetRoles().ForEach(x => // получаем роли и заносим их в ComboBox
             {
                 ComboBoxItem item = new ComboBoxItem { Content = x.NameRole, Tag = x };
                 ComboboxRole.Items.Add(item);
-                if (x.IdRole == user.IdRole)
+                if (x.IdRole == user.IdRole) // выбираем текущую роль
                 {
                     ComboboxRole.SelectedItem = item;
                 }
@@ -39,7 +39,7 @@ namespace ProektsBD.Windows
             ComboboxRole.SelectedItem = User.Role.NameRole;
             TextboxLogin.Text = User.Login;
             Password.Password = DBManager.db.Users.Where(x => x.IdUsers == User.IdUsers)
-                .Select(x => x.PassWord).First();
+                .Select(x => x.PassWord).First(); // получаем пароль пользоателя
             TextboxName.Text = User.NameUser;
             photo = User.Photo;
             Photo.Source = Utils.BinaryToImage(User.Photo);
@@ -47,8 +47,8 @@ namespace ProektsBD.Windows
 
         private void ButtonAddphoto_Click(object sender, RoutedEventArgs e)
         {
-            photo = Utils.ImageToBinary(Utils.GetImageWindowsDialog());
-            Photo.Source = Utils.BinaryToImage(photo);
+            photo = Utils.ImageToBinary(Utils.GetImageWindowsDialog()); // выбор фотографии через диалоговое окно Windows
+            Photo.Source = Utils.BinaryToImage(photo); // ставим фотографию в WPF
         }
 
         private void ButtonUpdateUser_Click(object sender, RoutedEventArgs e)

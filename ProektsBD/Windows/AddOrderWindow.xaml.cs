@@ -22,16 +22,15 @@ namespace ProektsBD.Windows
         public AddOrderWindow()
         {
             InitializeComponent();
-            List<TypeOrder> typeOrders = DBManager.GetTypeOrders();
-            foreach (TypeOrder item in typeOrders)
+            DBManager.GetTypeOrders().ForEach(x => // добаление типов заявок в ComboBox
             {
                 ComboBoxItem comboBoxItem = new ComboBoxItem
                 {
-                    Content = item.NameOrder,
-                    Tag = item
+                    Content = x.NameOrder,
+                    Tag = x
                 };
                 ComboboxTypeOrder.Items.Add(comboBoxItem);
-            }
+            });
             ComboboxTypeOrder.SelectedIndex = 0;
         }
 

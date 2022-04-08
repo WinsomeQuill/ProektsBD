@@ -95,32 +95,6 @@ namespace ProektsBD
             db.SaveChanges(); //сохраняем в БД
         }
 
-        //сохранение данных заявки в переменные
-        [ObsoleteAttribute]
-        public static bool dataOrder()
-        {
-            bool data = false;
-            /*Order ord = db.Order.Where(o => o.IdOrder == Sel).First();
-            Text = ord.Text;
-            Status = ord.Status;
-            Type = ord.Type;*/
-            data = true;
-            return data;
-        }
-
-        //сохранение данных пользователя в переменные
-        [ObsoleteAttribute]
-        public static bool dataUser()
-        {
-            bool data = false;
-            /*Users us = db.Users.Where(o => o.IdUsers == Sel).First();
-            Login = us.Login;
-            Password = us.PassWord;
-            Name = us.NameUser;*/
-            data = true;
-            return data;
-        }
-
         //удаление пользователя
         public static void RemoveUser(int id_user)
         {
